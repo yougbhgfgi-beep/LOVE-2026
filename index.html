@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ندا ❤️ محمد</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM (UMD) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                        script: ['Great Vibes', 'cursive'],
+                    },
+                    colors: {
+                        romantic: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'drift': 'drift 15s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        drift: {
+                            '0%': { transform: 'translate(0, 0) rotate(0deg)', opacity: 0 },
+                            '10%': { opacity: 1 },
+                            '90%': { opacity: 1 },
+                            '100%': { transform: 'translate(100vw, -100vh) rotate(360deg)', opacity: 0 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #fff1f2; /* Light Red Base */
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .red-glass {
+            background: rgba(254, 205, 211, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(225, 29, 72, 0.2);
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #ffe4e6; }
+        ::-webkit-scrollbar-thumb { background: #e11d48; border-radius: 4px; }
+
+        /* Video Background */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .timeline-img {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .timeline-img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Custom Slider Styling for Silver Cat/Heart */
+        .love-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 12px;
+            background: rgba(254, 205, 211, 0.4);
+            border-radius: 20px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .love-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%); /* Silver Gradient */
+            border: 3px solid #f9fafb;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .love-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .love-slider::-moz-range-thumb {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%);
+            border: 3px solid #f9fafb;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Chic Login Styles */
+        .chic-login-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .fancy-input {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            transition: all 0.3s ease;
+        }
+
+        .fancy-input:focus {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: #fb7185 !important;
+            box-shadow: 0 0 15px rgba(251, 113, 133, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // --- Icons ---
+        const Heart = ({ className, size = 24, fill = "currentColor" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+            </svg>
+        );
+
+        const Music = ({ className, size = 24 }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
+            </svg>
+        );
+
+        // --- Components ---
+        
+        // Floating Hearts Background
+        function BackgroundHearts() {
+            const [hearts, setHearts] = useState([]);
+            
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    const id = Math.random();
+                    const left = Math.random() * 100;
+                    const size = Math.random() * (30 - 15) + 15;
+                    const duration = Math.random() * (20 - 10) + 10;
+                    
+                    setHearts(prev => [...prev, { id, left, size, duration }]);
+                    
+                    setTimeout(() => {
+                        setHearts(prev => prev.filter(h => h.id !== id));
+                    }, duration * 1000);
+                }, 1500);
+                
+                return () => clearInterval(interval);
+            }, []);
+            
+            return (
+                <div className="fixed inset-0 pointer-events-none overflow-hidden z-[45]">
+                    {hearts.map(h => (
+                        <div 
+                            key={h.id} 
+                            className="absolute bottom-[-50px] animate-drift"
+                            style={{ 
+                                left: `${h.left}%`, 
+                                animationDuration: `${h.duration}s` 
+                            }}
+                        >
+                            <Heart size={h.size} fill="#fb7185" className="opacity-40" />
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // Love Meter Component
+        function LoveMeter() {
+            const [meterValue, setMeterValue] = useState(0);
+            const [showResult, setShowResult] = useState(false);
+            
+            const handleMeter = (e) => {
+                const val = parseInt(e.target.value);
+                setMeterValue(val);
+                if (val >= 100) setShowResult(true);
+            };
+
+            return (
+                <section className="py-24 px-6 relative overflow-hidden">
+                    <div className="max-w-2xl mx-auto text-center glass-panel p-8 md:p-12 rounded-[3.5rem] border-2 border-red-100 shadow-2xl relative">
+                        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-red-200 to-transparent"></div>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-8 text-red-800">مقياس حبنا ❤️</h2>
+                        <div className="mb-12 text-xl md:text-2xl text-red-600 font-bold">حرك القطة الفضية لتعرف مدى حبي لك!</div>
+                        
+                        <div className="relative h-20 flex items-center mb-8 px-4">
+                            <input 
+                                type="range" 
+                                min="0" 
+                                max="100" 
+                                value={meterValue} 
+                                onChange={handleMeter}
+                                className="love-slider z-20"
+                            />
+                        </div>
+
+                        {showResult && (
+                            <div className="animate-fade-in bg-red-50/50 p-6 rounded-3xl border border-red-100 mb-6">
+                                <h3 className="text-4xl md:text-5xl font-bold text-red-600 mb-4 animate-pulse">حبنا لا ينتهي! ❤️♾️</h3>
+                                <p className="text-xl md:text-2xl text-gray-700 font-medium">حبنا أكثر من أي رقم.. حبنا هو الحياة ذاتها يا محمد.</p>
+                            </div>
+                        )}
+                        
+                        {!showResult && (
+                            <div className="text-red-400 font-bold text-lg animate-bounce">
+                                {meterValue < 30 ? "لسة يا روحي..." : meterValue < 70 ? "قربنا يا حتة مني!" : "هانت خلاص!"}
+                            </div>
+                        )}
+                        <div className="mt-8 text-6xl opacity-20 filter grayscale drop-shadow-lg">🥈❤️</div>
+                    </div>
+                </section>
+            );
+        }
+
+        // --- Main Component ---
+        function LoveWebsite() {
+            const [isLogged, setIsLogged] = useState(false);
+            const [password, setPassword] = useState("");
+            const [showLetter, setShowLetter] = useState(false);
+            const [showSecret, setShowSecret] = useState(false);
+            const [showFinalScene, setShowFinalScene] = useState(false);
+            const [timeTogether, setTimeTogether] = useState({});
+            const [isPlaying, setIsPlaying] = useState(false);
+            const audioRef = useRef(null);
+
+            const loveStartDate = new Date("2024-09-20T00:00:00");
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    const now = new Date();
+                    const diff = now - loveStartDate;
+                    const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const years = Math.floor(totalDays / 365);
+                    const months = Math.floor((totalDays % 365) / 30);
+                    const days = totalDays % 30;
+                    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+                    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+                    const seconds = Math.floor(diff / 1000) % 60;
+                    setTimeTogether({ years, months, days, hours, minutes, seconds });
+                }, 1000);
+                return () => clearInterval(interval);
+            }, []);
+
+            const handleLogin = () => {
+                if (password.toUpperCase() === "LOVE") {
+                    setIsLogged(true);
+                    // Force play music after short delay to ensure DOM is ready
+                    setTimeout(() => {
+                        if (audioRef.current) {
+                            audioRef.current.play().catch(e => console.log("Audio play blocked", e));
+                            setIsPlaying(true);
+                        }
+                        setShowLetter(true);
+                    }, 500);
+                } else {
+                    alert("كلمة السر خطأ، حاول مرة أخرى ❤️");
+                }
+            };
+
+            const toggleAudio = () => {
+                if (isPlaying) audioRef.current.pause();
+                else audioRef.current.play();
+                setIsPlaying(!isPlaying);
+            };
+
+            // Audio Sync Handlers
+            const handleVideoPlay = () => {
+                if (audioRef.current && isPlaying) {
+                    audioRef.current.pause();
+                }
+            };
+
+            const handleVideoPause = () => {
+                if (audioRef.current && isPlaying) {
+                    audioRef.current.play();
+                }
+            };
+
+            if (!isLogged) {
+                return (
+                    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
+                        <video autoPlay muted loop playsInline className="video-bg h-full w-full">
+                            <source src="./video.mp4" type="video/mp4" />
+                        </video>
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70 backdrop-blur-sm"></div>
+
+                        <div className="relative z-10 chic-login-card p-12 md:p-16 rounded-[4rem] text-center text-white shadow-[0_0_100px_rgba(0,0,0,0.8)] max-w-md w-[90%] border border-white/10 overflow-hidden group">
+                           <div className="absolute -top-20 -right-20 w-40 h-40 bg-red-500/20 rounded-full blur-3xl group-hover:bg-red-500/30 transition-all duration-700"></div>
+                           <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-all duration-700"></div>
+                           
+                            <div className="mb-10 flex justify-center scale-125">
+                                <div className="bg-white/10 p-5 rounded-full animate-float shadow-[0_0_30px_rgba(251,113,133,0.4)]">
+                                    <Heart className="text-red-400" size={60} fill="#f43f5e" />
+                                </div>
+                            </div>
+                            
+                            <h1 className="text-4xl font-extrabold mb-4 font-sans tracking-tight text-white drop-shadow-2xl">محمد ❤️ ندا</h1>
+                            <p className="text-white/60 mb-12 font-medium">افتح قلبي يا أغلى ما عندي</p>
+                            
+                            <div className="relative mb-8">
+                                <input
+                                    type="password"
+                                    placeholder="كلمة السر الخاصة بنا"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="fancy-input w-full p-6 pl-14 rounded-3xl text-white placeholder-white/40 text-center text-xl outline-none shadow-inner"
+                                />
+                                <div className="absolute left-6 top-1/2 -translate-y-1/2 opacity-40">
+                                    <Heart size={24} />
+                                </div>
+                            </div>
+                            
+                            <button 
+                                onClick={handleLogin} 
+                                className="w-full bg-gradient-to-r from-red-600 to-rose-700 text-white font-bold py-6 rounded-3xl shadow-[0_10px_40px_rgba(225,29,72,0.4)] hover:shadow-[0_15px_60px_rgba(225,29,72,0.6)] hover:scale-[1.03] transition-all duration-300 text-xl border-t border-white/20 active:scale-95"
+                            >
+                                دخول لعالمنا ❤️
+                            </button>
+                            
+                            <div className="mt-8 text-white/30 text-sm font-medium tracking-widest uppercase">Forever Together</div>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="min-h-screen text-gray-800 relative bg-red-50 transition-colors duration-1000">
+                    <audio ref={audioRef} src="./music.mp3" loop />
+                    <BackgroundHearts />
+                    
+                    <button onClick={toggleAudio} className={`fixed top-4 left-4 z-50 p-3 rounded-full shadow-lg border border-red-200 ${isPlaying ? 'bg-red-500 text-white animate-spin' : 'bg-white text-red-500'}`}>
+                        <Music size={24} />
+                    </button>
+
+                    {/* Secret Popup */}
+                    {showSecret && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 animate-fade-in backdrop-blur-sm" onClick={() => setShowSecret(false)}>
+                            <div className="bg-white px-16 py-10 rounded-[2.5rem] text-5xl font-bold text-red-600 shadow-2xl scale-110">بحبك يا أغلى من عمري ❤</div>
+                        </div>
+                    )}
+
+                    {/* Letter Modal */}
+                    {showLetter && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 md:p-6 backdrop-blur-md">
+                            <div className="bg-white rounded-[2.5rem] max-w-3xl w-full p-8 md:p-12 shadow-2xl text-right overflow-y-auto max-h-[90vh] border-4 border-red-100" dir="rtl">
+                                <h2 className="text-4xl font-bold mb-8 text-red-600 border-b-2 border-red-50 pb-4">رسالة من قلبي ❤️</h2>
+                                <div className="text-xl leading-relaxed text-gray-700 space-y-6 font-medium">
+                                    <p>بص يا حبيبي احنا اهه عرفين بعض من زمان ويوم ما تدخلت حياتك كانت برضوا مرة واحدة ومش كانت مترتبه ايجت صدفه لسبب بس وحياه ربنا احسن صدفه وسبب في حياتي علشان عرفتني على حد زيك يا نور عيني 🥹♥️♥️</p>
+                                    <p>عاوزه اقولك اني من يوم ما عرفتك وانت بقيت كل حاجه لياا بقيت أبويا واخويا وحبيبي وصاحبي وسندي وضهري ونور عيني ودنيتي كلها انت بقيت الحياه اللي عايشه علشانها انا بحبكك قوي بحب حنيتك وبحب كلامك لياا بحب ضحكتك بحبك غيرتك علياا بحب كل حاجه بحبكك كلك على بعضك كده انت الحاجه الوحيده اللي طلعت منها بالدنيا انت الأكسجين اللي بتنفسه 🥺♥️</p>
+                                    <p>العيد قرب وانت معي يا عمري ودي العيد التاني لياا انا وانت 🥺وإن شاء الله يا حياتي مش هيبقى آخر عيد هنفضل مع بعض طول العمر 🏘🌎♥️😘</p>
+                                    <p>لسه كام شهر ونتم سنتين مع بعض ياروحي 👀♥️</p>
+                                    <p>ربنا يخليك ليا يا حته مني ويديمك ليا يا نور عيني وميحرمنيش منك ابداً يا حياتي 🌎🏘😘</p>
+                                </div>
+                                <div className="mt-10 flex justify-center">
+                                    <button onClick={() => setShowLetter(false)} className="bg-gradient-to-r from-red-500 to-rose-600 text-white px-12 py-4 rounded-full shadow-2xl hover:scale-110 transition-transform font-bold text-lg">بختمها بحبك ❤️</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Hero Section */}
+                    <section className="min-h-screen flex flex-col items-center justify-center text-center p-6 relative">
+                        <div className="animate-float mb-8">
+                            <Heart size={100} fill="#dc2626" className="text-red-600 drop-shadow-xl" />
+                        </div>
+                        <h1 className="text-6xl md:text-9xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-500 font-script pb-4 hero-title">Nada & Mohamed</h1>
+                        <h2 className="text-4xl md:text-6xl font-bold text-red-800 mb-6 drop-shadow-sm">ندا ❤️ محمد</h2>
+                        <p className="text-xl md:text-3xl text-red-600/80 font-medium italic">قصة حب محفورة في قلبي للأبد</p>
+                        <button onClick={() => setShowSecret(true)} className="mt-12 bg-white text-red-600 px-14 py-5 rounded-full shadow-2xl font-bold text-xl hover:bg-red-50 transition-all border-2 border-red-100 hover:scale-105 active:scale-95 text-red-600">زر المفاجأة ✨</button>
+                    </section>
+
+                    {/* Timeline with User Photos */}
+                    <section className="py-24 bg-white/40">
+                        <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 text-red-800 px-4">خط ذكرياتنا ❤️</h2>
+                        <div className="max-w-5xl mx-auto px-6 relative">
+                            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-red-200 hidden md:block rounded-full"></div>
+                            {[
+                                { t: "أجمل بداية", d: "أنت أجمل بداية لكل شيء جميل في حياتي.. وجودك هو الأمان اللي كنت بدور عليه ❤️", img: "./timeline1.jpg" },
+                                { t: "نور عيني", d: "كل دقة في قلبي بتنده باسمك.. أنت حبيبي ونور عيني وسندي في الدنيا 🌹", img: "./timeline2.jpg" },
+                                { t: "أحلى يوم", d: "كان احلى يوم يا نور عيني 🥺♥️ اليوم اللي اتخصمنى بسببه علشان مش كنت راضيه😂♥️ بس والله العظيم كان يوم تحفهه علشان وجودك يا عمري ♥️🥹 بحبكك قوي قوي يا مودي 😍🫶", img: "./timeline3.jpg" }
+                            ].map((item, i) => (
+                                <div key={i} className={`flex mb-24 flex-col md:flex-row ${i % 2 === 0 ? 'md:flex-row-reverse' : ''} items-center group`}>
+                                    <div className="md:w-1/2 flex justify-center">
+                                        <div className="w-64 h-80 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white timeline-img bg-red-100 timeline-img-container shadow-red-200/50">
+                                            <img src={item.img} className="w-full h-full object-cover" alt="Memory" />
+                                        </div>
+                                    </div>
+                                    <div className="z-10 bg-red-500 w-8 h-8 rounded-full border-4 border-white shadow-xl my-6 md:my-0 group-hover:scale-125 transition-transform"></div>
+                                    <div className="md:w-1/2 md:px-12 text-center md:text-right mt-6 md:mt-0">
+                                        <div className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-red-50 hover:bg-white transition-all transform group-hover:-translate-y-2">
+                                            <h3 className="text-2xl font-bold text-red-700 mb-3">{item.t}</h3>
+                                            <p className="text-red-900 font-medium text-lg leading-relaxed whitespace-pre-line">{item.d}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* New Dedicated Video Section */}
+                    <section className="py-24 bg-red-100/30">
+                        <div className="max-w-4xl mx-auto px-6 text-center">
+                            <h2 className="text-4xl font-bold mb-12 text-red-800">فيديو حبنا 😍📽️</h2>
+                            <div className="relative group p-4 border-4 md:border-8 border-white bg-white rounded-[2rem] md:rounded-[3rem] shadow-[0_20px_50px_rgba(225,29,72,0.2)]">
+                                <div className="aspect-video rounded-[1.5rem] md:rounded-[2rem] overflow-hidden bg-black relative">
+                                    <video 
+                                        controls 
+                                        className="w-full h-full object-cover shadow-inner"
+                                        onPlay={handleVideoPlay}
+                                        onPause={handleVideoPause}
+                                        onEnded={handleVideoPause}
+                                    >
+                                        <source src="./video.mp4" type="video/mp4" />
+                                    </video>
+                                </div>
+                                <div className="mt-8 text-xl md:text-2xl font-script text-red-600 italic">"كل لحظة معاك هي أحلى لحظة في حياتي"</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Love Meter */}
+                    <LoveMeter />
+
+                    {/* Counter */}
+                    <section className="py-24 text-center px-6">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-16 text-red-800">من يوم 20/9/2024 واحنا مع بعض ❤️</h2>
+                        <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-5xl mx-auto">
+                            <TimeBox label="سنين" value={timeTogether.years} />
+                            <TimeBox label="شهور" value={timeTogether.months} />
+                            <TimeBox label="أيام" value={timeTogether.days} />
+                            <TimeBox label="ساعات" value={timeTogether.hours} />
+                            <TimeBox label="دقائق" value={timeTogether.minutes} />
+                            <TimeBox label="ثواني" value={timeTogether.seconds} />
+                        </div>
+                    </section>
+
+                    <footer className="py-24 text-center border-t border-red-100">
+                        <p className="text-2xl md:text-3xl font-script text-red-400 mb-12 px-4 italic">For the rest of our life ❤</p>
+                        <button onClick={() => setShowFinalScene(true)} className="bg-gradient-to-br from-red-600 to-purple-700 text-white px-12 md:px-16 py-4 md:py-5 rounded-full text-xl md:text-2xl font-bold hover:scale-110 transition-all shadow-2xl active:scale-95">النهاية ❤️</button>
+                    </footer>
+
+                    {/* Final Scene */}
+                    {showFinalScene && <FinalSceneComponent onClose={() => setShowFinalScene(false)} />}
+                </div>
+            );
+        }
+
+        function TimeBox({ label, value }) {
+            return (
+                <div className="bg-white border-2 border-red-100 text-red-600 w-24 sm:w-28 md:w-36 p-4 sm:p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] shadow-xl transform hover:-translate-y-3 transition-transform">
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 drop-shadow-sm">{value || 0}</div>
+                    <div className="text-xs md:text-sm font-bold uppercase tracking-widest text-red-300">{label}</div>
+                </div>
+            );
+        }
+
+        function FinalSceneComponent({ onClose }) {
+            const [step, setStep] = useState(0);
+            useEffect(() => {
+                const timings = [500, 3000, 8000, 13000, 18000, 23000, 28000];
+                const timeouts = timings.map((t, i) => setTimeout(() => setStep(i + 1), t));
+                return () => timeouts.forEach(clearTimeout);
+            }, []);
+
+            return (
+                <div className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center text-center p-6 md:p-8 overflow-y-auto">
+                    <button onClick={onClose} className="absolute top-6 md:top-8 right-6 md:right-8 text-white/40 hover:text-white text-3xl md:text-4xl font-bold">×</button>
+                    <div className="max-w-2xl w-full text-white" dir="rtl">
+                        {step === 1 && <h2 className="text-6xl md:text-8xl font-bold text-red-500 animate-pulse drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">إلى محمد.. ❤️</h2>}
+                        {step >= 2 && step < 6 && (
+                            <div className="space-y-8 md:space-y-12 animate-fade-in py-10">
+                                {step >= 2 && (
+                                    <div className="bg-white/10 p-8 rounded-[2rem] backdrop-blur-sm border border-white/20">
+                                        <p className="text-2xl md:text-4xl font-bold leading-relaxed shadow-red-900/40 drop-shadow-lg mb-6">محمد.. أنت لست فقط حبيبي، بل أنت موطني وأماني.</p>
+                                        <p className="text-xl md:text-2xl text-red-200">كل ثانية بجانبك هي عمر جديد أعيشه بسعادة.</p>
+                                    </div>
+                                )}
+                                {step >= 3 && (
+                                    <div className="animate-fade-in delay-500">
+                                        <p className="text-2xl md:text-3xl font-bold text-white shadow-lg">عهد عليّ أن أبقى لك نبضاً لا يتوقف، وحباً لا ينتهي.</p>
+                                    </div>
+                                )}
+                                {step >= 4 && (
+                                    <p className="text-3xl md:text-5xl font-script text-red-400 mt-10 animate-bounce">أحبك فوق ما تتخيل.. ❤️</p>
+                                )}
+                                {step >= 5 && (
+                                    <p className="text-xl text-yellow-300 font-bold mt-6">ربنا يخليك ليا وما يحرمنيش منك أبداً يا كل دنيتي. 🏘🌎♥️</p>
+                                )}
+                            </div>
+                        )}
+                        {step >= 6 && (
+                            <div className="animate-fade-in flex flex-col items-center">
+                                <div className="mb-10 text-red-500 bg-white/10 p-6 rounded-full animate-float">
+                                    <Heart size={80} fill="currentColor" />
+                                </div>
+                                <h1 className="text-6xl md:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-600 mb-8 md:mb-12 font-script drop-shadow-2xl hero-title">Nada ❤️ Mohamed</h1>
+                                <p className="text-3xl md:text-4xl font-bold mb-4">حبنا أقوى من كل شيء..</p>
+                                <p className="text-4xl md:text-5xl font-bold text-red-400">إلى ما لا نهاية ♾️</p>
+                                {step >= 7 && <p className="text-xl md:text-2xl text-white/40 mt-10 font-serif italic border-t border-white/10 pt-6">For the rest of our life.</p>}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<LoveWebsite />);
+    </script>
+</body>
+
+</html>
